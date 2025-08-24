@@ -14,8 +14,10 @@
       flex-direction: column;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
+      color: #6adbef;
       text-align: center;
+      /* Background image */
+      background: url("Cat 6.jpg") no-repeat center center/cover;
     }
     h2 {
       font-size: 2.5rem;
@@ -28,9 +30,9 @@
       font-size: 4rem;
       font-weight: bold;
       padding: 20px 40px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(6, 117, 243, 0.1);
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(241, 8, 222, 0.5);
       margin-bottom: 30px;
     }
     .controls {
@@ -56,7 +58,7 @@
       cursor: pointer;
       font-weight: bold;
       background: #ff7eb3;
-      color: #fff;
+      color: #ffffff;
       transition: all 0.3s ease;
     }
     button:hover {
@@ -67,44 +69,35 @@
 </head>
 <body>
   <h2>✨ Mehera's Countdown ✨</h2>
-  <div id="timer">00:00:00</div>
-
-  <div class="controls">
-    <input type="number" id="hours" placeholder="Hours" min="0">
-    <input type="number" id="minutes" placeholder="Minutes" min="0" max="59">
-    <input type="number" id="seconds" placeholder="Seconds" min="0" max="59">
-    <button onclick="startCountdown()">Start</button>
-  </div>
+  <div id="timer">Loading...</div>
 
   <script>
-    let countdown;
+  // 🎯 FIXED target date & time (example: Sep 1, 2025, 17:00:00 local time)
+  const targetTime = new Date("September 1, 2025 17:00:00").getTime();
 
-    function startCountdown() {
-      clearInterval(countdown);
+  function updateCountdown() {
+    const currentTime = new Date().getTime();
+    const diff = targetTime - currentTime;
 
-      let h = parseInt(document.getElementById("hours").value) || 0;
-      let m = parseInt(document.getElementById("minutes").value) || 0;
-      let s = parseInt(document.getElementById("seconds").value) || 0;
-
-      let totalSeconds = h * 3600 + m * 60 + s;
-
-      countdown = setInterval(() => {
-        if (totalSeconds <= 0) {
-          clearInterval(countdown);
-          document.getElementById("timer").innerText = "⏰ TIME UP!";
-          return;
-        }
-
-        totalSeconds--;
-
-        let hrs = Math.floor(totalSeconds / 3600);
-        let mins = Math.floor((totalSeconds % 3600) / 60);
-        let secs = totalSeconds % 60;
-
-        document.getElementById("timer").innerText =
-          `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-      }, 1000);
+    if (diff <= 0) {
+      document.getElementById("timer").innerText = "⏰ TIME UP! Dhakaaa!";
+      clearInterval(timerInterval);
+      return;
     }
-  </script>
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerText =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  // update every second
+  const timerInterval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 </body>
 </html>
