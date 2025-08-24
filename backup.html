@@ -1,0 +1,254 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mehera's Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #6adbef;
+      text-align: center;
+      /* Background image */
+      background: url("Cat 6.jpg") no-repeat center center/cover;
+    }
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      letter-spacing: 2px;
+    }
+    #timer {
+      font-size: 4rem;
+      font-weight: bold;
+      padding: 20px 40px;
+      background: rgba(6, 117, 243, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(241, 8, 222, 0.5);
+      margin-bottom: 30px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    input {
+      padding: 10px;
+      width: 80px;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1rem;
+      outline: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #ff7eb3;
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #ff4d94;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h2>✨ Mehera's Countdown ✨</h2>
+  <div id="timer">Loading...</div>
+
+  <script>
+  // 🎯 FIXED target date & time (example: Sep 1, 2025, 17:00:00 local time)
+  const targetTime = new Date("September 1, 2025 17:00:00").getTime();
+
+  function updateCountdown() {
+    const currentTime = new Date().getTime();
+    const diff = targetTime - currentTime;
+
+    if (diff <= 0) {
+      document.getElementById("timer").innerText = "⏰ TIME UP! Dhakaaa!";
+      clearInterval(timerInterval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerText =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  // update every second
+  const timerInterval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mehera's Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 🔥 Slideshow background */
+    .slideshow {
+  position: fixed; /* full screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.slideshow img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill screen while maintaining aspect ratio */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.slideshow img.active {
+  opacity: 1;
+}
+
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 15px #00e6ff, 0 0 25px #00e6ff;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    #timer {
+      font-size: 3rem;
+      padding: 20px 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 30px #00e6ff;
+      animation: fadeIn 1s ease;
+    }
+
+    /* glowing numbers */
+    #timer span {
+      display: inline-block;
+      margin: 0 10px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00e6ff, 0 0 20px #00e6ff, 0 0 30px #00e6ff;
+      transition: transform 0.3s;
+    }
+
+    #timer span:hover {
+      transform: scale(1.2);
+      color: #ff4d94;
+      text-shadow: 0 0 15px #ff4d94, 0 0 30px #ff4d94;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00e6ff, 0 0 20px #00e6ff; }
+      to   { text-shadow: 0 0 20px #ff4d94, 0 0 40px #ff4d94; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Slideshow Background -->
+  <div class="slideshow">
+    <img src="1.png" class="active">
+    <img src="2.jpg">
+    <img src="three.png">
+    <img src="4.png">
+    <img src="5.jpg">
+  </div>
+
+  <h2>✨ Mehera's Countdown ✨</h2>
+  <div id="timer">Loading...</div>
+
+  <script>
+    // 🎯 FIXED Target Example
+    const targetTime = new Date("September 1, 2025 17:00:00").getTime();
+
+    function updateCountdown() {
+      const currentTime = new Date().getTime();
+      const diff = targetTime - currentTime;
+
+      if (diff <= 0) {
+        document.getElementById("timer").innerText = "⏰ TIME UP!";
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").innerHTML = `
+        <span>${days}d</span> 
+        <span>${hours}h</span> 
+        <span>${minutes}m</span> 
+        <span>${seconds}s</span>`;
+    }
+
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 🔄 Slideshow Logic
+    const slides = document.querySelectorAll('.slideshow img');
+    let currentSlide = 0;
+
+    function changeSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(changeSlide, 5000); // change every 5 sec
+  </script>
+</body>
+</html>
+
